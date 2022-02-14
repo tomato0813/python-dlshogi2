@@ -33,9 +33,9 @@ else:
 
 # モデル
 model = None
-if args.model == 'PolicyValueDuelingNetwork'
+if args.model == 'PolicyValueDuelingNetwork':
     model = PolicyValueDuelingNetwork()
-elif args.model == 'PolicyValueNetwork'
+elif args.model == 'PolicyValueNetwork':
     model = PolicyValueNetwork()
 model.to(device)
 
