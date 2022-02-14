@@ -9,7 +9,7 @@ from pydlshogi2.dataloader import HcpeDataLoader
 parser = argparse.ArgumentParser(description='Train policy value network')
 parser.add_argument('train_data', type=str, nargs='+', help='training data file')
 parser.add_argument('test_data', type=str, help='test data file')
-parser.add_argument('--model', '-m', type=int, default='PolicyValueDuelingNetwork', help='Model')
+parser.add_argument('--model', '-m', type=str, default='PolicyValueDuelingNetwork', help='Model')
 parser.add_argument('--gpu', '-g', type=int, default=0, help='GPU ID')
 parser.add_argument('--epoch', '-e', type=int, default=1, help='Number of epoch times')
 parser.add_argument('--batchsize', '-b', type=int, default=1024, help='Number of positions in each mini-batch')
@@ -37,6 +37,8 @@ if args.model == 'PolicyValueDuelingNetwork':
     model = PolicyValueDuelingNetwork()
 elif args.model == 'PolicyValueNetwork':
     model = PolicyValueNetwork()
+else:
+    model = PolicyValueDuelingNetwork()
 model.to(device)
 
 # オプティマイザ
