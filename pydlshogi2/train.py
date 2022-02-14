@@ -3,7 +3,7 @@ import logging
 import torch
 import torch.optim as optim
 
-from pydlshogi2.network.policy_value_resnet import PolicyValueNetwork
+from pydlshogi2.network.policy_value_resnet import PolicyValueNetwork, PolicyValueDuelingNetwork
 from pydlshogi2.dataloader import HcpeDataLoader
 
 parser = argparse.ArgumentParser(description='Train policy value network')
@@ -31,7 +31,7 @@ else:
     device = torch.device("cpu")
 
 # モデル
-model = PolicyValueNetwork()
+model = PolicyValueDuelingNetwork()
 model.to(device)
 
 # オプティマイザ
