@@ -4,12 +4,14 @@ import torch
 from cshogi import Board, BLACK, NOT_REPETITION, REPETITION_DRAW, REPETITION_WIN, REPETITION_SUPERIOR, move_to_usi
 from pydlshogi2.features import FEATURES_NUM, make_input_features, make_move_label
 from pydlshogi2.uct.uct_node import NodeTree
-from pydlshogi2.network.policy_value_resnet import PolicyValueNetwork
+from pydlshogi2.network.policy_value_resnet import PolicyValueNetwork, PolicyValueDuelingNetwork
 from pydlshogi2.player.base_player import BasePlayer
 
 import time
 import math
 
+# デフォルトモデル
+DEFAULT_MODEL = PolicyValueDuelingNetwork
 # デフォルトGPU ID
 DEFAULT_GPU_ID = 0
 # デフォルトバッチサイズ
@@ -158,7 +160,7 @@ class MCTSPlayer(BasePlayer):
 
     # モデルのロード
     def load_model(self):
-        self.model = PolicyValueNetwork()
+        self.model = DEFAULT_MODEL()
         self.model.to(self.device)
         checkpoint = torch.load(self.modelfile, map_location=self.device)
         self.model.load_state_dict(checkpoint['model'])
