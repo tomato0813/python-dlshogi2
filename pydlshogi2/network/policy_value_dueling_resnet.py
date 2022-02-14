@@ -14,6 +14,7 @@ class Bias(nn.Module):
     def forward(self, input):
         return input + self.bias
 
+    
 class ResNetBlock(nn.Module):
     def __init__(self, channels):
         super(ResNetBlock, self).__init__()
@@ -34,7 +35,7 @@ class ResNetBlock(nn.Module):
         return F.relu(out + x)
 
       
-class PolicyValueNetwork(nn.Module):
+class PolicyValueDuelingNetwork(nn.Module):
     def __init__(self, blocks=10, channels=192, fcl=256):
         super(PolicyValueNetwork, self).__init__()
         self.conv1 = nn.Conv2d(in_channels=FEATURES_NUM, out_channels=channels, kernel_size=3, padding=1, bias=False)
